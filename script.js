@@ -1,29 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
     const svgPaths = document.querySelectorAll("#mainSvg path");
+    const clickText = document.querySelector(".sec1_text_center");
 
     svgPaths.forEach((path) => {
         const length = path.getTotalLength();
-
         path.style.stroke = "#fff";
         path.style.strokeWidth = "2";
         path.style.fill = "none";
-        
         path.style.strokeDasharray = length;
         path.style.strokeDashoffset = length;
-        
     });
 
-const svgBox = document.getElementById("svgBox");
-  
-  svgBox.addEventListener("click", () => {
-    svgPaths.forEach((path) => {
-      path.style.transition = "stroke-dashoffset 1.2s ease";
-      path.style.strokeDashoffset = "0";
-      path.style.opacity = "";
+    const svgBox = document.getElementById("svgBox");
+
+    svgBox.addEventListener("click", () => {
+
+        // 1) SVG 선 애니메이션
+        svgPaths.forEach((path) => {
+            path.style.transition = "stroke-dashoffset 1.2s ease";
+            path.style.strokeDashoffset = "0";
+        });
+
+        // 2) 클릭 텍스트 사라짐
+        clickText.classList.add("hide");
     });
-  });
 });
-
 
 
 

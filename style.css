@@ -56,9 +56,18 @@ nav {
     padding: 5em;
 }
 
+.sec1_text_center {
+    transition: opacity 0.5s ease;
+}
+
+.sec1_text_center.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .sec1_text ul {
     width: max-content;
-        display: flex;
+    display: flex;
     flex-direction: row;
     gap: 2rem; 
 }
@@ -80,6 +89,35 @@ nav {
     align-items: center;
     justify-content: center;
 }
+
+/* ul li 애니메이션--------------------------------------------------*/
+.sec1_text li {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.sec1_text li span {
+    position: relative;
+    display: inline-block;
+    padding-right: 2rem;
+    animation: sec1-marquee 8s linear infinite;
+}
+
+.sec1_text li span::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 100%;   
+    top: 0;
+    white-space: nowrap;
+}
+
+@keyframes sec1-marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+/* ul li 애니메이션--------------------------------------------------*/
 
 
 
@@ -104,7 +142,7 @@ nav {
 
 
 
-#sec3 .sec3_svg {
+#sec3 .sec3_svg, #sec4 .sec4_svg, #sec5 .sec5_svg {
     position: absolute;
     inset: 0;            
     z-index: 1;        
@@ -120,7 +158,7 @@ nav {
     z-index: 1;
 }
 
-#mainSvg2, #mainSvg3 {
+#mainSvg2, #mainSvg3, #mainSvg4, #mainSvg5 {
     width: 90%;
     height: 90%;
     display: block; 
@@ -130,7 +168,7 @@ nav {
     cursor: pointer;
 }
 
-.sec2_text, .sec3_text {
+.sec2_text, .sec3_text, .sec4_text, .sec5_text {
     height: 100dvh;
     display: flex;
     justify-content: center;
@@ -138,7 +176,7 @@ nav {
     z-index: 5;
 }
 
-.sec2_text ul, .sec3_text ul {
+.sec2_text ul, .sec3_text ul, .sec4_text ul, .sec5_text ul {
     width: max-content;
     display: flex;
     justify-content: space-between;
@@ -148,15 +186,14 @@ nav {
 
 
 
-.sec2_text ul li, .sec3_text ul li {
+.sec2_text ul li, .sec3_text ul li, .sec4_text ul li, .sec5_text ul li {
     font-size: 50px;
     padding: 1rem 2rem;
     white-space: nowrap; 
 }
 
-
-
-.sec2_text li:nth-child(1), .sec3_text li:nth-child(1) {
+.sec2_text li:nth-child(1), .sec3_text li:nth-child(1), 
+.sec4_text li:nth-child(1), .sec5_text li:nth-child(1)  {
     color: #F7FFCF;
     font-family: "subway-berlin-sc", sans-serif;
     letter-spacing: 3px;
@@ -166,14 +203,14 @@ nav {
     flex-direction:row;
 }
 
-
-.sec2_text li:nth-child(2), .sec3_text li:nth-child(2) {
+.sec2_text li:nth-child(2), .sec3_text li:nth-child(2),
+.sec4_text li:nth-child(2), .sec5_text li:nth-child(2)  {
     color: #d0d0d0;
     letter-spacing: 120%;
     display: flex;   
     text-align: right;  
     font-size: 24px;
-        display: flex;   
+    display: flex;   
     align-items: center;
     justify-content: center;
     flex-direction:row;
@@ -188,7 +225,7 @@ nav {
     border-radius: 30px;
     background-color: rgb(60, 60, 61);
     position: absolute;
-    margin-top: 400px;
+    margin-top: 600px;
     z-index: 9999;
 }
 .sec3-menu ul {
@@ -224,4 +261,44 @@ nav {
     height: auto;
 }
 
+
+
+
+
+.sec4_music_box {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    width: 400px;
+    height: 150px;
+    border-radius: 20px;
+    transform: translate(360px, -150px);
+    z-index: 9999;
+    gap: 15px;
+}
+
+
+.sec4_music_box button {
+    z-index: 9999;
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid rgb(199, 199, 199);
+    color:#F7FFCF;
+    padding: 10px;
+    border-radius: 15px;
+    font-size: 24px;
+}
+
+#dragon-sad,
+#dragon-excited,
+#dragon-calm,
+#rain,
+#thunder,
+#snow {
+    opacity: 0;
+    transition: opacity .4s ease;
+}
 
