@@ -88,6 +88,7 @@ nav {
     display: flex;   
     align-items: center;
     justify-content: center;
+    
 }
 
 #_hand-group {
@@ -354,6 +355,7 @@ nav {
     margin-bottom: 450px;
         font-family: "subway-berlin-sc", sans-serif;
         color:rgb(56, 56, 56);
+            animation: floatY1 3s ease-in-out infinite alternate;
 }
 
 
@@ -446,12 +448,12 @@ nav {
         .target-glow {
             animation: pulse 1.5s infinite alternate ease-in-out;
             stroke: #fff;
-            stroke-width: 2px;
+            stroke-width: 0.1px;
         }
 
         @keyframes pulse {
             0% {
-                filter: drop-shadow(0 0 2px #fff);
+                filter: drop-shadow(0 0 0.5px #fff);
                 opacity: 0.85; 
                 r: 20;
             }
@@ -468,6 +470,49 @@ nav {
             opacity: 0;
         }
 
+
+
+
+
+
+
+
+
+
+#topBtn {
+position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 9999;
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 50%;
+    background-color: #F7FFCF;
+    color: #333;
+    font-family: "subway-berlin-sc", sans-serif;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0;          
+    visibility: hidden;  
+    pointer-events: none;  
+    transition: all 0.4s ease; 
+    transform: translateY(20px); 
+}
+
+#topBtn.show {
+    opacity: 1;           
+    visibility: visible; 
+    pointer-events: auto; 
+    transform: translateY(0); 
+}
+
+#topBtn:hover {
+    background-color: #fff;
+    transform: translateY(-5px); 
+}
+        
 .copyright {
     position: fixed;   
     bottom: 0;     
@@ -480,4 +525,12 @@ nav {
     color: #9a9a9a;   
     font-size: 14px; 
 
+}
+
+
+
+@keyframes floatY1 {
+    0%   { transform: translate(0%, -50%) translateY(0); }
+    50%  { transform: translate(-0%, -50%) translateY(-1vw); }
+    100% { transform: translate(-0%, -50%) translateY(0); }
 }

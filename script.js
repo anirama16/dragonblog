@@ -162,7 +162,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (dist < 200) {
             isMoving = true;
             currentIndex = (currentIndex + 1) % positions.length;
-            console.log(`이동: ${positions[currentIndex].id}`);
             reachTo(positions[currentIndex]);
             setTimeout(() => { isMoving = false; }, 600);
         }
@@ -220,3 +219,28 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
+//----탑버튼-----------------------------------------------------//
+
+document.addEventListener("DOMContentLoaded", () => {
+    const topBtn = document.getElementById("topBtn");
+
+// 1. 스크롤 감지하여 버튼 페이드인/아웃
+    window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) { 
+            // 300px 이상 내려가면 클래스 추가 (보임)
+            topBtn.classList.add("show");
+        } else {
+            // 위로 올라가면 클래스 제거 (사라짐)
+            topBtn.classList.remove("show");
+        }
+    });
+
+    // 2. 클릭 시 최상단으로 부드럽게 이동
+    topBtn.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // 부드러운 스크롤
+        });
+    });
+});

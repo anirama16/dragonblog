@@ -35,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
             overlay.classList.remove('show');
             isGameActive = true;
 
-            // 용 표정 초기화
             if(dragonEyes) dragonEyes.style.display = 'block';
             if(dragonSuccess) {
                 dragonSuccess.style.display = 'none';
