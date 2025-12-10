@@ -230,3 +230,97 @@ function resetToDefault() {
     });
 }
 
+/*----------------------음악-----------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+const canvas = document.getElementById('skyCanvas');
+const ctx = canvas.getContext('2d');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+
+const imgPaths = ['./img/cloud.png', './img/cloud2.png'];
+const cloudImages = []; 
+let loadedCount = 0;   
+
+imgPaths.forEach(path => {
+    const img = new Image();
+    img.src = path;
+    img.onload = () => {
+        cloudImages.push(img); 
+        loadedCount++;
+        
+        if (loadedCount === imgPaths.length) {
+            init();
+            animate();
+        }
+    };
+});
+
+
+class Cloud {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height * 0.6;
+        this.scale = Math.random() * 1.0 + 0.5;
+        this.speed = this.scale * 0.5;
+        this.opacity = Math.random() * 0.3 + 0.05;
+
+        this.myImg = cloudImages[Math.floor(Math.random() * cloudImages.length)];
+    }
+
+    update() {
+        this.x -= this.speed;
+
+        if (this.x < -200 * this.scale) {
+            this.x = canvas.width;
+            this.y = Math.random() * canvas.height * 0.6;
+            
+        }
+    }
+
+    draw() {
+        ctx.globalAlpha = this.opacity;
+        ctx.drawImage(
+            this.myImg, 
+            this.x,
+            this.y,
+            200 * this.scale,
+            120 * this.scale
+        );
+        ctx.globalAlpha = 1.0;
+    }
+}
+
+const clouds = [];
+const cloudCount = 14;
+
+function init() {
+    for (let i = 0; i < cloudCount; i++) {
+        clouds.push(new Cloud());
+    }
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    clouds.forEach(cloud => {
+        cloud.update();
+        cloud.draw();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});

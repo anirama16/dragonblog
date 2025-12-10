@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 1) SVG 선 애니메이션
         svgPaths.forEach((path) => {
-            path.style.transition = "stroke-dashoffset 1.2s ease";
+            path.style.transition = "stroke-dashoffset 2.5s ease";
             path.style.strokeDashoffset = "0";
         });
 
@@ -36,18 +36,14 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     gsap.registerPlugin();
 
-    // 1. 요소 가져오기
     const armGroup = document.getElementById('_arm-flesh');
     const handGroup = document.getElementById('_hand-group');
     const svgElement = document.getElementById('mainSvg2');
 
     const armPaths = armGroup.querySelectorAll('path');
-    const armUpper = armPaths[0]; // 윗팔
-    const armLower = armPaths[1]; // 아랫팔
+    const armUpper = armPaths[0]; 
+    const armLower = armPaths[1]; 
 
-    // =================================================================
-    // [1] 좌표 상수 (수정 금지)
-    // =================================================================
     const shoulder1 = { x: 830, y: 720 }; 
     const shoulder2 = { x: 836, y: 840 }; 
     const initHand = { x: 639.77, y: 810.63 }; 
@@ -55,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const baseLen = 85; 
     const wristOffset = 60; 
 
-    // 초기화
     gsap.set(armUpper, { svgOrigin: `${shoulder1.x} ${shoulder1.y}` });
     gsap.set(armLower, { svgOrigin: `${shoulder2.x} ${shoulder2.y}` });
     gsap.set(handGroup, { transformOrigin: "50% 50%" });
@@ -69,19 +64,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // scaleCorrection: 팔 길이 보정 (팔이 손에 안 닿을 때 늘려주는 배율)
     // =================================================================
     let positions = [
-        // [0] 초기 위치 (리셋)
         { 
             id: "initial", 
             hand: { x: initHand.x, y: initHand.y }, 
             handScale: 1, // 크기 1
             isReset: true 
         },
-        
-        // [1] 오른쪽 위
         { 
             id: "top-right", 
-            hand: { x: 1800, y: 200 }, 
-            handScale: 0.85, 
+            hand: { x: 1500, y: 220 }, 
+            handScale: 1, 
             scaleCorrection: 1
         },
 
@@ -252,3 +244,5 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log(`},`);
     }
 });
+
+
