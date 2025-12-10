@@ -10,10 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            // 화면에 충분히 들어온 상태일 때만 실행
             if (entry.intersectionRatio >= 0.7 && !done) {
 
-                // 스크롤 조금만 닿아도 발동되는 걸 방지하기 위해 지연 추가
                 timer = setTimeout(() => {
                     if (!done) {
                         done = true;

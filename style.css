@@ -348,7 +348,13 @@ nav {
 }
 
 
-
+#sec6 .sec6_span {
+    position: absolute;
+    font-size: 150px;
+    margin-bottom: 450px;
+        font-family: "subway-berlin-sc", sans-serif;
+        color:rgb(56, 56, 56);
+}
 
 
 
