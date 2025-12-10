@@ -2,13 +2,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     (function() { 
         
-        const gameSvg = document.getElementById('canvas'); // 변수명 변경 (svg -> gameSvg)
+        const gameSvg = document.getElementById('canvas'); 
         const particleSvg = document.getElementById('particle-svg');
         const overlay = document.getElementById('overlay');
         const tryAgainBtn = document.getElementById('tryAgain');
         
         const dragonEyes = document.getElementById('dragon-default-eyes');
         const dragonSuccess = document.getElementById('success');
+        const dragonBubble = document.querySelector('.sec7_bubble');
 
         let gameCircles = [];     
         let gameParticles = [];   
@@ -21,17 +22,16 @@ document.addEventListener("DOMContentLoaded", () => {
         const BASE_COLOR = '#4ecdc4'; 
         const TARGET_COLOR = '#45b7d1'; 
 
-        // 요소가 없으면 실행하지 않음 (에러 방지)
+
         if (!gameSvg || !particleSvg) return;
 
-        // 게임 시작
         initGame();
 
         function initGame() {
             gameCircles = [];
             gameParticles = [];
             gameSvg.innerHTML = ''; 
-            particleSvg.innerHTML = ''; // 파티클 초기화
+            particleSvg.innerHTML = ''; 
             overlay.classList.remove('show');
             isGameActive = true;
 
@@ -44,14 +44,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
-            // 공 생성
+
             const targetIndex = Math.floor(Math.random() * CIRCLE_COUNT);
             for (let i = 0; i < CIRCLE_COUNT; i++) {
                 const isTarget = (i === targetIndex);
                 createBouncingCircle(isTarget);
             }
 
-            // 애니메이션 시작
             if (gameAnimId) cancelAnimationFrame(gameAnimId);
             animateGame();
         }
@@ -59,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
         function createBouncingCircle(isTarget) {
             const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 
-            // 위치 랜덤 (가장자리 여백 고려)
             const x = Math.random() * (STAGE_W - 40) + 20;
             const y = Math.random() * (STAGE_H - 40) + 20;
             const size = 20;
@@ -117,14 +115,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        function animateGame() { // animate -> animateGame (이름 변경)
-            // 1. 공 움직임 (게임 중일 때만)
+        function animateGame() { 
             if (isGameActive) {
                 gameCircles.forEach(c => {
                     c.x += c.vx;
                     c.y += c.vy;
-
-                    // 벽 튕기기 (650 x 350 기준)
                     if (c.x < c.size || c.x > STAGE_W - c.size) c.vx = -c.vx;
                     if (c.y < c.size || c.y > STAGE_H - c.size) c.vy = -c.vy;
 
@@ -173,7 +168,7 @@ document.addEventListener("DOMContentLoaded", () => {
             targetElement.style.display = 'none';
 
 
-            createExplosion(globalX, globalY, '#ffd700'); 
+            createExplosion(globalX, globalY, '#e7ffb3ff'); 
             createExplosion(globalX, globalY, '#ffffff'); 
             createExplosion(globalX, globalY, '#206aff'); 
 
@@ -183,10 +178,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 dragonSuccess.style.display = 'block';
                 if(typeof gsap !== 'undefined') {
                     gsap.fromTo(dragonSuccess, 
-                        { y: 50, opacity: 0 }, 
+                        { y: 520, opacity: 0 }, 
                         { y: 0, opacity: 1, duration: 0.6, ease: "back.out(1.7)" }
                     );
                 }
+            }
+            if(dragonBubble) {
+                gsap.to(dragonBubble, {
+                    opacity: 1,
+                    y: "60%",
+                    duration: 0.5,
+                    delay: 0.7, 
+                    ease: "back.out(1.2)"
+                });
             }
 
             setTimeout(() => {
